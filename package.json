@@ -47,10 +47,10 @@
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.11.18",
     "morgan": "^1.10.0",
-    "faker": "^5.4.0",
     "node_env": "0.0.3",
     "short-uuid": "^4.1.0",
-    "uuid": "^7.0.3"
+    "uuid": "^7.0.3",
+    "faker": "^5.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.0",
