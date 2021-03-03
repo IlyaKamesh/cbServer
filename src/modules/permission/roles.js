@@ -1,4 +1,4 @@
-export const listRoles = ['new', 'businessOwner', 'impersonate'];
+export const listRoles = ['new', 'luckyPetOwner', 'impersonate'];
 
 const base = [
   'base.create.own',
@@ -8,8 +8,18 @@ const base = [
   'base.delete.own',
 ];
 
+const pet = [
+  'pet.create.own',
+  'pet.get.own',
+  'pet.search.own',
+  'pet.update.own',
+  'pet.delete.own',
+];
+
 const roles = {
-  new: ['user.auth', ...base],
+  new: ['user.auth'],
+
+  luckyPetOwner: ['user.auth', ...base, ...pet],
 
   admin: [
     // USER
@@ -23,6 +33,7 @@ const roles = {
 
     // EXAMPLE
     ...base,
+    ...pet,
   ],
 
   // impersonate: [
