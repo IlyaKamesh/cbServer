@@ -11,7 +11,6 @@ import petDeleteById from './controllers/deleteById';
 import petStats from './controllers/stats';
 import pauseController from '../core/pauseController';
 
-
 const router = Router();
 
 // CRUD

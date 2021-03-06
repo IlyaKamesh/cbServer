@@ -14,12 +14,23 @@ export default async function petCreate(req, res) {
 
   // Читаем данные из запроса
   const name = get(req, 'body.name');
-  const description = get(req, 'body.description');
+  // const description = get(req, 'body.description');
+  const email = get(req, 'body.email');
+  const phone = get(req, 'body.phone');
+  const petName = get(req, 'body.petName');
+  const birthDate = get(req, 'body.birthDate');
+  const breed = get(req, 'body.breed');
+  const location = get(req, 'body.location');
 
   const createPetQueryResult = await createPetQuery({
     _id,
+    email,
+    petName,
+    birthDate,
+    breed,
+    phone,
     name,
-    description,
+    location,
     owner: userId,
   });
 

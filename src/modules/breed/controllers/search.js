@@ -1,4 +1,4 @@
-import Pet from '../Model';
+import Breed from '../Model';
 import message from '../../utils/messages';
 import { get } from 'lodash';
 import escapeRegExp from '../../utils/escapeRegExp';
@@ -7,7 +7,7 @@ import paginationSearchFormatter from '../../utils/paginationSearchFormatter';
 
 // Поиск с пагинацией
 
-const petSearch = async (req, res) => {
+const breedSearch = async (req, res) => {
   const userId = get(req, 'userData.userId');
 
   try {
@@ -30,8 +30,8 @@ const petSearch = async (req, res) => {
     //   query.accessType = { $eq: accessType };
     // }
 
-    const totalCountPromise = Pet.countDocuments(query); // Находим кол-во результатов
-    const searchPromise = petSearchQuery({ query, page, limit }); // Находим результат
+    const totalCountPromise = Breed.countDocuments(query); // Находим кол-во результатов
+    const searchPromise = breedSearchQuery({ query, page, limit }); // Находим результат
 
     // Запускаем запросы параллельно
     const PromiseAllResult = await Promise.all([totalCountPromise, searchPromise]);
@@ -46,30 +46,29 @@ const petSearch = async (req, res) => {
       searchResult: searchResult.payload,
     });
 
-    res.status(200).json(message.success('PetSearch ok', result));
+    res.status(200).json(message.success('BreedSearch ok', result));
   } catch (error) {
-    const analyticsId = analytics('PET_SEARCH_ERROR', {
+    const analyticsId = analytics('BREED_SEARCH_ERROR', {
       error,
       body: req.body,
-      entity: 'Pet',
+      entity: 'Breed',
       user: userId,
-      controller: 'petSearch',
+      controller: 'breedSearch',
     });
 
-    res.status(400).json(message.fail('PetSearch error', analyticsId));
+    res.status(400).json(message.fail('BreedSearch error', analyticsId));
   }
 };
 
-export default petSearch;
+export default breedSearch;
 
-function petSearchQuery({ query, page, limit }) {
-  return Pet.find(query)
+function breedSearchQuery({ query, page, limit }) {
+  return Breed.find(query)
     .sort({ createdAt: -1 })
     .limit(limit)
     .skip(limit * (page - 1))
-    .populate({path: 'breed', select: 'name',})
     .exec()
     .then((docs) => {
-      return message.success('Pet found', docs);
+      return message.success('Breed found', docs);
     });
 }

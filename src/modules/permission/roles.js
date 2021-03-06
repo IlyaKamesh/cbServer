@@ -16,10 +16,18 @@ const pet = [
   'pet.delete.own',
 ];
 
+const breed = [
+  'breed.create.own',
+  'breed.get.own',
+  'breed.search.own',
+  'breed.update.own',
+  'breed.delete.own',
+];
+
 const roles = {
   new: ['user.auth'],
 
-  luckyPetOwner: ['user.auth', ...base, ...pet],
+  luckyPetOwner: ['user.auth', ...base, ...pet, ...breed],
 
   admin: [
     // USER
@@ -34,6 +42,7 @@ const roles = {
     // EXAMPLE
     ...base,
     ...pet,
+    ...breed,
   ],
 
   // impersonate: [

@@ -1,13 +1,13 @@
-import Pet from '../Model';
+import Breed from '../Model';
 import message from '../../utils/messages';
 import analytics from '../../analytics/controllers/analytics';
 import { get } from 'lodash';
 
-const petGetById = (req, res) => {
-  const petId = get(req, 'params.petId');
+const breedGetById = (req, res) => {
+  const breedId = get(req, 'params.breedId');
   const userId = get(req, 'userData.userId');
 
-  Pet.findById(petId)
+  Breed.findById(breedId)
     // подтягивает данные из соседних коллекций, аналог SQL JOIN
     .populate({
       path: 'owner',
@@ -21,22 +21,22 @@ const petGetById = (req, res) => {
     .exec()
     .then((doc) => {
       if (doc) {
-        res.status(200).json(message.success('Get Pet by id ok', doc));
+        res.status(200).json(message.success('Get Breed by id ok', doc));
       } else {
-        res.status(404).json(message.fail('No pet for provided id'));
+        res.status(404).json(message.fail('No breed for provided id'));
       }
     })
     .catch((error) => {
-      const analyticsId = analytics('PET_GET_BY_ID_ERROR', {
+      const analyticsId = analytics('BREED_GET_BY_ID_ERROR', {
         error,
         body: req.body,
-        entity: 'Pet',
+        entity: 'Breed',
         user: userId,
-        controller: 'petGetById',
+        controller: 'breedGetById',
       });
 
-      res.status(400).json(message.fail('Pet get error', analyticsId));
+      res.status(400).json(message.fail('Breed get error', analyticsId));
     });
 };
 
-export default petGetById;
+export default breedGetById;

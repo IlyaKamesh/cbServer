@@ -9,47 +9,25 @@ const Schema = mongoose.Schema(
       required: false,
     },
 
+    description: {
+      type: String,
+      required: false,
+    },
+
+    color: {
+      type: String,
+      required: false,
+    },
+
+    gender: {
+      type: String,
+      required: false,
+    },
+
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
-    },
-
-    petName: {
-      type: String,
-      required: false,
-    },
-
-    birthDate: {
-      type: Date,
-      required: false,
-    },
-
-    email: {
-      type: String,
-      required: false,
-    },
-
-    phone: {
-      type: String,
-      required: false,
-    },
-
-    location: {
-      lat: String,
-      lon: String,
-      address: String,
-      city: String,
-      zip: String,
-      state: String,
-      country: String,
-      required: false,
-    },
-
-    breed: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Breed',
-      required: false,
     },
 
     // tags: [
@@ -63,4 +41,4 @@ const Schema = mongoose.Schema(
   { timestamps: {}, versionKey: false },
 );
 
-export default mongoose.model('Pet', Schema);
+export default mongoose.model('Breed', Schema);
